@@ -1,4 +1,4 @@
-const toggle = document.getElementById('.menu-btn');
+const toggle = document.querySelector('.menu-btn');
 const nav = document.querySelector('nav.menu');
 
 
