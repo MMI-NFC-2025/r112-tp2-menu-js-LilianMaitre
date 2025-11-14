@@ -1,28 +1,43 @@
 /* Pour construire le menu en mobile : 
 On construit le menu tel qu'il sera une fois ouvert.
 On ajoute les propriétés "visibility: hidden" et "opacity: 0" pour masquer le menu. */
+
+
 .menu {
-  position: fixed;/* Fixe le menu en position, il ne défilera pas avec la page : https://developer.mozilla.org/fr/docs/Web/CSS/position#fixed */
-  background-color: #ffffff;/* Définit la couleur de fond du menu en blanc : https://developer.mozilla.org/fr/docs/Web/CSS/background-color */
-  display: flex;/* Utilise Flexbox pour la mise en page des éléments enfants : https://developer.mozilla.org/fr/docs/Web/CSS/display-inside#flex */
-  top: 0;/* Positionne le menu en haut de la page : https://developer.mozilla.org/fr/docs/Web/CSS/top */
-  bottom: 0;/* Étend le menu jusqu'en bas de la page */
-  left: 0;/* Positionne le menu à gauche de la page */
-  right: 0;/* Étend le menu jusqu'à droite de la page */
-  transition: all 0.4s ease-in-out;/* Définit une transition de 0.4 secondes pour toutes les propriétés, avec un effet d'accélération et de décélération : https://developer.mozilla.org/fr/docs/Web/CSS/transition */
-  opacity: 0;/* Rend le menu complètement transparent : https://developer.mozilla.org/fr/docs/Web/CSS/opacity */
-  visibility: hidden;/* Cache le menu en le rendant invisible : https://developer.mozilla.org/fr/docs/Web/CSS/visibility#hidden  */
+  position: fixed;
+  /* Fixe le menu en position, il ne défilera pas avec la page : https://developer.mozilla.org/fr/docs/Web/CSS/position#fixed */
+  background-color: #ffffff;
+  /* Définit la couleur de fond du menu en blanc : https://developer.mozilla.org/fr/docs/Web/CSS/background-color */
+  display: flex;
+  /* Utilise Flexbox pour la mise en page des éléments enfants : https://developer.mozilla.org/fr/docs/Web/CSS/display-inside#flex */
+  top: 0;
+  /* Positionne le menu en haut de la page : https://developer.mozilla.org/fr/docs/Web/CSS/top */
+  bottom: 0;
+  /* Étend le menu jusqu'en bas de la page */
+  left: 0;
+  /* Positionne le menu à gauche de la page */
+  right: 0;
+  /* Étend le menu jusqu'à droite de la page */
+  transition: all 0.4s ease-in-out;
+  /* Définit une transition de 0.4 secondes pour toutes les propriétés, avec un effet d'accélération et de décélération : https://developer.mozilla.org/fr/docs/Web/CSS/transition */
+  opacity: 0;
+  /* Rend le menu complètement transparent : https://developer.mozilla.org/fr/docs/Web/CSS/opacity */
+  visibility: hidden;
+  /* Cache le menu en le rendant invisible : https://developer.mozilla.org/fr/docs/Web/CSS/visibility#hidden  */
 }
 
 /* On se sert de Javascript pour gérer l'ouverture et la fermeture du menu avec l'attribut "aria-hidden" */
 .menu[aria-hidden="false"] {
-  visibility: visible;/* Rend le menu visible */
-  opacity: 1;/* Rend le menu complètement opaque */
+  visibility: visible;
+  /* Rend le menu visible */
+  opacity: 1;
+  /* Rend le menu complètement opaque */
 }
 
 /* On ajoute une classe sur le body pour empêcher le scroll lorsque le menu est ouvert */
 .noscroll {
-  overflow: hidden;/* Empêche le défilement de la page (hidden) */
+  overflow: hidden;
+  /* Empêche le défilement de la page (hidden) */
 }
 
 /* Mise en forme du bouton de menu "Hamburger" */
@@ -43,4 +58,109 @@ On ajoute les propriétés "visibility: hidden" et "opacity: 0" pour masquer le 
 .menu-btn[aria-expanded="true"] {
   transform: rotate(90deg);
   /* Fait pivoter le bouton de menu de 90 degrés lorsqu'il est en état "expanded" */
+}
+
+.chat-img, .dog {
+  display: block;
+  width: 100%;
+  max-width: 600px;
+  /* largeur maximale par défaut, ajustez si nécessaire */
+  aspect-ratio: 4 / 3;
+  /* changez ici pour 16/9, 1/1, etc. */
+  object-fit: cover;
+  /* recadre l'image pour remplir le cadre sans la déformer */
+  object-position: center center;
+  /* centre le recadrage */
+  overflow: hidden;
+  margin: 0 auto;
+  border-radius: 50px;
+  /* arrondir les bords de l'image */
+  border: 6px solid rgba(255, 0, 0, 0.9);
+  /* contour (modifiable) */
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.756);
+  transition: border-radius 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+}
+
+.chat-img:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
+}
+
+/* Centre le contenu (image) à l'intérieur d'un conteneur .bozo
+   - Utilise flexbox pour centrer horizontalement et verticalement
+   - Si vous ne voulez que le centrage horizontal, remplacez align-items par normal */
+.bozo {
+  display: flex;
+  justify-content: center;
+  /* centre horizontalement */
+  align-items: center;
+  /* centre verticalement */
+  text-align: center;
+  /* fallback pour contenus inline */
+}
+
+/* Assure que l'image ne déborde pas du conteneur et reste centrée */
+.bozo .chat-img .dog{
+  margin: 0;
+  /* supprimer marges additionnelles */
+  max-width: 50%;
+  height: auto;
+}
+
+/* Fallback pour navigateurs sans support aspect-ratio */
+@supports not (aspect-ratio: 1/1) {
+  .chat-img {
+    width: 100%;
+    max-width: 600px;
+    height: 450px;
+    /* hauteur correspondant à 4/3 pour 600px de large */
+    object-fit: cover;
+  }
+}
+
+/* --- Animated vivid background (used by .vivid-bg) --- */
+@keyframes vividColors {
+  0% {
+    background-color: #ff3b3b;
+  }
+
+  14% {
+    background-color: #ff8a00;
+  }
+
+  28% {
+    background-color: #ffd500;
+  }
+
+  42% {
+    background-color: #32ff7e;
+  }
+
+  56% {
+    background-color: #00d4ff;
+  }
+
+  70% {
+    background-color: #7a5cff;
+  }
+
+  84% {
+    background-color: #ff3bbf;
+  }
+
+  100% {
+    background-color: #ff3b3b;
+  }
+}
+
+.vivid-bg {
+  animation: vividColors 0.5s linear infinite;
+  min-height: 100vh;
+  /* ensure full-page coverage */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vivid-bg {
+    animation: none;
+  }
 }
